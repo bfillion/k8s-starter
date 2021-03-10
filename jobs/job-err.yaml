@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job3-5
+spec:
+  backoffLimit: 2
+  parallelism: 4
+  template:
+    spec:
+      containers:
+        - name: job
+          image: busybox
+          args:
+            - /bin/sh
+            - -c
+            - date; echo sleeping....; sleep 15s; exit 0;
+      restartPolicy: OnFailure

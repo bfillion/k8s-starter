@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>5344b8d2-d122-46b9-93ca-103592e04e95</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.0" />
+    <PackageReference Include="KubernetesClient" Version="4.0.16" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.0.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,46 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace job.starter.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiController]
+    [Route("[controller]")]
     public class JobsController : Controller
     {
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        readonly IConfiguration _configuration;
+        readonly IJob _job;
+
+        public JobsController(IConfiguration configuration, IJob job)
         {
-            return new string[] { "value1", "value2" };
+            _configuration = configuration;
+            _job = job;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
+        // POST jobs
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            _job.StartAsync(value);
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] string value)
         {
-        }
+            using (StreamReader reader = new StreamReader(HttpContext.Request.Body, Encoding.UTF8))
+            {
+                var body = await reader.ReadToEndAsync();
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+                foreach (var item in HttpContext.Request.Headers)
+                {
+                    Console.WriteLine($"Header : {item.Key} | value : {item.Value}");
+                }
+
+                Console.WriteLine($"Body : {body}");
+            }
+
+            return Ok();
         }
     }
 }

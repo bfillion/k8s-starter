@@ -6,3 +6,8 @@ services:
     build:
       context: .
       dockerfile: job.starter/Dockerfile
+    environment:
+      YAML: ./config/job.yaml
+    volumes:
+      - ./config:/app/config
+      - $HOME/.kube:/root/.kube

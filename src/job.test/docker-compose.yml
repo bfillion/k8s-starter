@@ -6,3 +6,5 @@ services:
     build:
       context: .
       dockerfile: job.test/Dockerfile
+    environment:
+      ARG: ddd

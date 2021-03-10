@@ -4,6 +4,6 @@ namespace job.starter
 {
     public interface IJob
     {
-        Task<string> StartAsync(string message);
+        string StartAsync(string message);
     }
 }

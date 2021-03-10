@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: console-e015f006-80d2-11eb-85b4-c347fc2ca375
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: job:v1
+        args: ["coco"]
+      restartPolicy: Never
+  backoffLimit: 1
