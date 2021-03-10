@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  job.test:
+    image: ${DOCKER_REGISTRY-}job
+    build:
+      context: .
+      dockerfile: job.test/Dockerfile

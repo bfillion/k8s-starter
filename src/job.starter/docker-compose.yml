@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  job.starter:
+    image: ${DOCKER_REGISTRY-}job
+    build:
+      context: .
+      dockerfile: job.starter/Dockerfile
